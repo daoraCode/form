@@ -1,25 +1,40 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css;'
+import { render } from 'react-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  // constructor to initialize states objects
+  constructor() {
+    super()
+
+    this.state = {
+      email: "",
+      password: "",
+      rememberMe: false,
+      emailIsValid: false,
+      passwordValid: false,
+      isSubmitted: false
+    }
+
+    // binding
+
+  }
+
+  // custom methods or React functions
+
+  render() {
+
+    // props
+
+    // states
+
+    return (
+      <>
+      </>
+      )
+  }
 }
 
 export default App;
