@@ -1,39 +1,64 @@
-// import logo from './logo.svg';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css;'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
 import { render } from 'react-dom';
 
-class App extends React.Component {
+// var regex = /[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
-  // constructor to initialize states objects
+class App extends React.Component {
+  //! constructor to initialize states objects
   constructor() {
-    super()
+    super();
 
     this.state = {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       rememberMe: false,
       emailIsValid: false,
       passwordValid: false,
-      isSubmitted: false
-    }
+      isSubmitted: false,
+    };
 
-    // binding
-
+    //! binding
+    this.handleEmailChange = this.handleEmailChange.bind(this);
   }
 
-  // custom methods or React functions
+  //! custom methods or React functions
+  handleEmailChange(e) {
+    console.log('handleEmailChange');
+    this.setState({ value: e.target.value });
+  }
+
+  handleEmailChange(e) {
+    console.log('handleEmailChange');
+    this.setState({ value: e.target.value });
+  }
 
   render() {
+    //! props
+    // const {} = this.props;
 
-    // props
-
-    // states
+    //! states
+    const { email } = this.state;
 
     return (
-      <>
-      </>
-      )
+      <div className='container mx-5 my-5'>
+        <form>
+        <h1>Login</h1>
+          <label for='exampleFormControlInput1' className='form-label'>
+            Enter email...
+          </label>
+          <input
+            type='email'
+            className='form-control'
+            id='exampleFormControlInput1'
+            placeholder='name@example.com'
+            value={email} 
+            onChange={this.handleEmailChange}
+          ></input>
+        </form>
+      </div>
+    );
   }
 }
 
