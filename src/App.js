@@ -1,16 +1,13 @@
 import React from 'react';
 import './App.css';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 // import { render } from 'react-dom';
 
 class App extends React.Component {
   // constructor for initializing
   constructor () {
     super();
-    console.log(this.props)
-
+    // initial state
     this.state = {
       email: '',
       password: '',
@@ -18,28 +15,26 @@ class App extends React.Component {
       emailIsValid: false,
       passwordValid: false,
       isSubmitted: false,
+      firstName: '',
+      lastName: ''
     };
-
     // bindings
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleRememberMeChange = this.handleRememberMeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+    this.handleLastNameChange = this.handleLastNameChange.bind(this);
   }
 
-  // custom methods or React functions
+  // methods
   handleSubmit(e, emailIsValid, passwordValid) {
     e.preventDefault();
-
     emailIsValid = this.state.emailIsValid;
     passwordValid = this.state.passwordValid;
-
-    if (emailIsValid = true && passwordValid === true) {
+    if (emailIsValid === true && passwordValid === true) {
       this.setState({ isSubmitted: true })
     }
-
-    console.log('email :', this.state.emailIsValid)
-    console.log('password :', this.state.passwordValid)
   }
 
   handleEmailChange(e) {
@@ -48,8 +43,6 @@ class App extends React.Component {
     if (regex) {
       this.setState({ emailIsValid: true });
     }
-    console.log('regex :', e.target.value);
-    console.log(regex);
   }
 
   handlePasswordChange(e) {
@@ -64,11 +57,18 @@ class App extends React.Component {
     this.setState({ rememberMe: true });
   }
 
+  handleFirstNameChange(e) {
+    this.setState({ firstName: e.target.value });
+  }
+
+  handleLastNameChange(e) {
+    this.setState({ lastName: e.target.value });
+  }
 
   render() {
-    // state
-    const { isSubmitted } = this.state;
-    const { email, password } = this.state;
+
+    // data state
+    const { isSubmitted, email, password, firstName, lastName } = this.state;
     const regex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 
     return (
@@ -84,7 +84,7 @@ class App extends React.Component {
             onSubmit={(e) => this.handleSubmit(e)}
           >
             <h1 className='main_title'>Login</h1>
-            <label className='form-label'>Email adress</label>
+            <label className='form-label'>Email adress • Full name</label>
             <input
               type='text'
               className={
@@ -95,6 +95,28 @@ class App extends React.Component {
               placeholder='Enter email...'
               value={email}
               onChange={this.handleEmailChange.bind(this)}
+              required
+            ></input>
+            <input type="text"
+              className={
+                firstName.length > 3
+                  ? 'form-control my-3 is-valid'
+                  : 'form-control my-3 is-invalid'
+              }
+              placeholder='Enter your first name...'
+              value={firstName}
+              onChange={this.handleFirstNameChange.bind(this)}
+              required
+            ></input>
+            <input type="text"
+              className={
+                lastName.length > 3
+                  ? 'form-control mb-5 is-valid'
+                  : 'form-control mb-5 is-invalid'
+              }
+              placeholder='Enter your last name...'
+              value={lastName}
+              onChange={this.handleLastNameChange.bind(this)}
               required
             ></input>
             <label className='form-label'>Password</label>
