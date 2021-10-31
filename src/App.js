@@ -18,7 +18,9 @@ class App extends React.Component {
       firstName: '',
       lastName: ''
     };
+
     // bindings
+    // Optimizing the methods with bindings will ensure a correct bind between a class and the method
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleRememberMeChange = this.handleRememberMeChange.bind(this);
@@ -27,24 +29,28 @@ class App extends React.Component {
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
   }
 
-  // methods
+  // If emailIsValid and paswordIsValid get a 'true' value then isSubmitted will be 'true'
   handleSubmit(e, emailIsValid, passwordValid) {
     e.preventDefault();
-    emailIsValid = this.state.emailIsValid;
-    passwordValid = this.state.passwordValid;
+    emailIsValid = this.state.emailIsValid; // parameter to call the data state emailIsValid
+    passwordValid = this.state.passwordValid; // paramater to call the data state passwordValid
     if (emailIsValid === true && passwordValid === true) {
       this.setState({ isSubmitted: true })
     }
   }
 
+  // this method will be used to get the email input value.
+  // RegExp constructor
+  // if RegExep is true (test()) then change the data state emailIsValid to 'true'
   handleEmailChange(e) {
     this.setState({ email: e.target.value });
-    let regex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/).test(e.target.value);
-    if (regex) {
+    let regex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/).test(e.target.value); 
+    if (regex) { 
       this.setState({ emailIsValid: true });
     }
   }
 
+  // To handle the password, I used the RegExp into this function for the password input
   handlePasswordChange(e) {
     this.setState({ password: e.target.value });
     let regexPswd = RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/).test(e.target.value);
@@ -69,6 +75,7 @@ class App extends React.Component {
 
     // data state
     const { isSubmitted, email, password, firstName, lastName } = this.state;
+    // for email pattern
     const regex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 
     return (
