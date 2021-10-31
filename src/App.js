@@ -41,7 +41,7 @@ class App extends React.Component {
     console.log('email :', this.state.emailIsValid)
     console.log('password :', this.state.passwordValid)
   }
-  
+
   handleEmailChange(e) {
     this.setState({ email: e.target.value });
     let regex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/).test(e.target.value);
@@ -81,7 +81,7 @@ class App extends React.Component {
         ) : (
           <form
             autoComplete='off'
-            onSubmit={(e) => this.handleSubmit(e)} 
+            onSubmit={(e) => this.handleSubmit(e)}
           >
             <h1 className='main_title'>Login</h1>
             <label className='form-label'>Email adress</label>
