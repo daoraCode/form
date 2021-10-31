@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -37,10 +42,13 @@
   }
 } */
 
-
+.container-fluid {
+  background-color: rgba(170, 184, 206, 0.075);
+}
 
 .main_title {
-  font-size: 84px;
+  color: rgb(220, 20, 73);
+  font-size: 59px;
   text-align: center;
 }
 
@@ -49,5 +57,5 @@
   font-size: 84px;
   text-align: center;
   padding: 30px 50px;
-  background-color: #89898a;
+  background-color: #282828;
 }

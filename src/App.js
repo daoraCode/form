@@ -72,7 +72,7 @@ class App extends React.Component {
     const regex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 
     return (
-      <div className='container-fluid mx-3 my-5 px-5 py-2 justify-content-center'>
+      <div className='container-fluid mx-3 my-5 px-5 pb-5 pt-5 justify-content-center'>
         {isSubmitted ? (
           <>
             <h1 className='logged_title'>Form Submitted</h1>
@@ -83,7 +83,7 @@ class App extends React.Component {
             autoComplete='off'
             onSubmit={(e) => this.handleSubmit(e)}
           >
-            <h1 className='main_title'>Login</h1>
+            <h1 className='main_title'>Login 🪁</h1>
             <label className='form-label'>Email adress • Full name</label>
             <input
               type='text'
@@ -103,7 +103,7 @@ class App extends React.Component {
                   ? 'form-control my-3 is-valid'
                   : 'form-control my-3 is-invalid'
               }
-              placeholder='Enter your first name...'
+              placeholder='Enter first name...'
               value={firstName}
               onChange={this.handleFirstNameChange.bind(this)}
               required
@@ -114,7 +114,7 @@ class App extends React.Component {
                   ? 'form-control mb-5 is-valid'
                   : 'form-control mb-5 is-invalid'
               }
-              placeholder='Enter your last name...'
+              placeholder='Enter last name...'
               value={lastName}
               onChange={this.handleLastNameChange.bind(this)}
               required
