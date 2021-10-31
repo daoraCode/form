@@ -88,7 +88,7 @@ class App extends React.Component {
         ) : (
           <form
             autoComplete='off'
-            onSubmit={this.handleSubmit.bind(this, e)} // passing the event (e) parameter
+            onSubmit={e => this.handleSubmit(e)}
           >
             <h1 className='main_title'>Login 🪁</h1>
             <label className='form-label'>Email adress • Full name</label>
