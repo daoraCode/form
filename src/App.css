@@ -40,6 +40,14 @@
 
 
 .main_title {
-  font-size: 70px;
+  font-size: 84px;
   text-align: center;
+}
+
+.logged_title {
+  color: blanchedalmond;
+  font-size: 84px;
+  text-align: center;
+  padding: 30px 50px;
+  background-color: #89898a;
 }

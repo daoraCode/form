@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
   // constructor for initializing
-  constructor() {
+  constructor () {
     super();
 
     this.state = {
@@ -22,103 +22,113 @@ class App extends React.Component {
     // bindings
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRememberMeChange = this.handleRememberMeChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // get rid of refreshing page
-
   // custom methods or React functions
+  handleSubmit(e) {
+
+    e.preventDefault();
+
+    let emailDone = this.state.emailIsValid;
+    let pswdDone = this.state.passwordValid;
+
+    if (!emailDone === true && !pswdDone === true) {
+      this.setState({ isSubmitted: true })
+    }
+    console.log('email :', this.state.emailIsValid)
+    console.log('password :', this.state.passwordValid)
+    this.handleEmailChange();
+    this.handlePasswordChange();
+  }
+  
   handleEmailChange(e) {
+    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/.test(e.target.value);
     this.setState({ email: e.target.value });
-    // console.log(e.target.value);
-    let regex = /[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    regex.test(e.target.value);
     if (regex) {
       this.setState({ emailIsValid: true });
     }
-  }
+  };
 
   handlePasswordChange(e) {
-    this.setState({ password: e.target.value });
-    if (e.length >= 5) {
+    if (e.length > 4) {
       this.setState({ passwordValid: true });
     }
+    this.setState({ password: e.target.value });
   }
 
   handleRememberMeChange() {
     this.setState({ rememberMe: true });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-  }
 
   render() {
-    // props
-    // const {} = this.props;
-
-    // states
+    // state
+    const { isSubmitted } = this.state;
     const { email, password } = this.state;
-
-    // let emailValidator = email.message('email', this.state.email, 'required|email');
+    const regex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 
     return (
-      <div className='container-fluid mx-3 my-5 px-5 py-5 justify-content-center'>
-        <form
-          onSubmit={this.handleSubmit.bind(this)}
-          autoComplete='off'
-          required
-        >
-          <h1 className='main_title'>Login</h1>
-          <label className='form-label my-3'>Email adress</label>
-          <input
-            type='text'
-            className={
-              email.match(/[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/)
-                ? 'form-control my-3 is-valid'
-                : 'form-control my-3 is-invalid'
-            }
-            placeholder='Enter email...'
-            value={email}
-            onChange={this.handleEmailChange.bind(this)}
-            required
-            isInvalid
-          ></input>
-          <label className='form-label my-3'>Password</label>
-          <input
-            type='password'
-            className={
-                password.length >= 5
-                ? 'form-control my-3 is-valid'
-                : 'form-control my-3 is-invalid'
-            }
-            placeholder='Enter password...'
-            value={password}
-            onChange={this.handlePasswordChange.bind(this)}
-            required
-            isInvalid
-          ></input>
-          <div className='custom-control custom-checkbox mb-3'>
+      <div className='container-fluid mx-3 my-5 px-5 py-2 justify-content-center'>
+        {isSubmitted ? (
+          <>
+            <h1 className='logged_title'>Form Submitted</h1>
+            <p>{email}</p>
+          </>
+        ) : (
+          <form
+            autoComplete='off'
+            onSubmit={(e) => this.handleSubmit(e)} 
+          >
+            <h1 className='main_title'>Login</h1>
+            <label className='form-label'>Email adress</label>
             <input
-              type='checkbox'
-              className='custom-control-input'
+              type='text'
+              className={
+                email.match(regex)
+                  ? 'form-control my-3 is-valid'
+                  : 'form-control my-3 is-invalid'
+              }
+              placeholder='Enter email...'
+              value={email}
+              onChange={this.handleEmailChange.bind(this)}
               required
             ></input>
-            <label
-              onChange={this.handleRememberMeChange.bind(this)}
-              className='custom-control-label mx-2'
-              for='customControlValidation1'
-            >
-              Remember me
-            </label>
-          </div>
-          <button type='submit' className='btn btn-primary my-3'>
-            Submit
-          </button>
-        </form>
+            <label className='form-label'>Password</label>
+            <input
+              type='password'
+              className={
+                password.length >= 5
+                  ? 'form-control my-3 is-valid'
+                  : 'form-control my-3 is-invalid'
+              }
+              placeholder='Enter password...'
+              value={password}
+              onChange={this.handlePasswordChange.bind(this)}
+              required
+            ></input>
+            <div className='custom-control custom-checkbox'>
+              <input
+                onChange={this.handleRememberMeChange.bind(this)}
+                type='checkbox'
+                className='custom-control-input'
+                defaultChecked={this.state.rememberMe}
+              ></input>
+              <label
+                className='custom-control-label mx-2'
+                htmlFor='customControlValidation1'
+              >
+                Remember me
+              </label>
+            </div>
+            <button type='submit' className='btn btn-primary my-3'>
+              Submit
+            </button>
+          </form>
+        )}
       </div>
-    );
+    )
   }
 }
 
