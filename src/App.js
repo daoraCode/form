@@ -9,6 +9,7 @@ class App extends React.Component {
   // constructor for initializing
   constructor () {
     super();
+    console.log(this.props)
 
     this.state = {
       email: '',
@@ -27,35 +28,36 @@ class App extends React.Component {
   }
 
   // custom methods or React functions
-  handleSubmit(e) {
-
+  handleSubmit(e, emailIsValid, passwordValid) {
     e.preventDefault();
 
-    let emailDone = this.state.emailIsValid;
-    let pswdDone = this.state.passwordValid;
+    emailIsValid = this.state.emailIsValid;
+    passwordValid = this.state.passwordValid;
 
-    if (!emailDone === true && !pswdDone === true) {
+    if (emailIsValid = true && passwordValid === true) {
       this.setState({ isSubmitted: true })
     }
+
     console.log('email :', this.state.emailIsValid)
     console.log('password :', this.state.passwordValid)
-    this.handleEmailChange();
-    this.handlePasswordChange();
   }
   
   handleEmailChange(e) {
-    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/.test(e.target.value);
     this.setState({ email: e.target.value });
+    let regex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/).test(e.target.value);
     if (regex) {
       this.setState({ emailIsValid: true });
     }
-  };
+    console.log('regex :', e.target.value);
+    console.log(regex);
+  }
 
   handlePasswordChange(e) {
-    if (e.length > 4) {
+    this.setState({ password: e.target.value });
+    let regexPswd = RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/).test(e.target.value);
+    if (regexPswd) {
       this.setState({ passwordValid: true });
     }
-    this.setState({ password: e.target.value });
   }
 
   handleRememberMeChange() {
@@ -99,7 +101,7 @@ class App extends React.Component {
             <input
               type='password'
               className={
-                password.length >= 5
+                password.length > 7
                   ? 'form-control my-3 is-valid'
                   : 'form-control my-3 is-invalid'
               }
